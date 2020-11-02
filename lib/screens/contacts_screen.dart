@@ -54,7 +54,6 @@ class ContactsScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              // color: Colors.pinkAccent,
               child: Container(
                 child: ContactsList(),
               ),

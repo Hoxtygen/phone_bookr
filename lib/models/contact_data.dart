@@ -52,12 +52,6 @@ class ContactData extends ChangeNotifier {
     ),
   ];
 
-  // sortContact() {
-  //   _contacts = _contacts.sort((a, b) =>
-  //       a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase()));
-  //   return _contacts;
-  // }
-
   UnmodifiableListView<Contact> get contacts {
     return UnmodifiableListView(_contacts);
   }
