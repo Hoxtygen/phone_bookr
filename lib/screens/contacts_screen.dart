@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phone_bookr/widgets/contacts_list.dart';
 
 class ContactsScreen extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class ContactsScreen extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.white,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30.0),
                 bottomRight: Radius.circular(30.0),
@@ -52,15 +53,16 @@ class ContactsScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Container(
-            color: Colors.pinkAccent,
             child: Container(
-              child:
-                  Text("I'm going to contain the lists of contacts available"),
+              // color: Colors.pinkAccent,
+              child: Container(
+                child: ContactsList(),
+              ),
             ),
-          ))
+          )
         ],
       ),
+      backgroundColor: Color(0xffFF4761),
     );
   }
 }
