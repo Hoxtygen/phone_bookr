@@ -59,4 +59,11 @@ class ContactData extends ChangeNotifier {
   int get contactCount {
     return _contacts.length;
   }
+
+  void addContact(String firstName, String lastName, String phoneNumber) {
+    final newContact = Contact(
+        firstName: firstName, lastName: lastName, phoneNumber: phoneNumber);
+    _contacts.add(newContact);
+    notifyListeners();
+  }
 }
