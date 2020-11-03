@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:phone_bookr/models/contact_data.dart';
+import 'package:provider/provider.dart';
 
 class AddContactScreen extends StatefulWidget {
   @override
@@ -6,13 +8,12 @@ class AddContactScreen extends StatefulWidget {
 }
 
 class _AddContactScreenState extends State<AddContactScreen> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String firstName;
+  String lastName;
+  String phoneNumber;
   @override
   Widget build(BuildContext context) {
-    String firstName;
-    String lastName;
-    String phoneNumber;
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
     return Column(
       children: [
         Container(
@@ -31,7 +32,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "New Contact",
@@ -40,9 +41,14 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   fontSize: 20.0,
                 ),
               ),
-              Icon(
-                Icons.cancel,
-                size: 30.0,
+              IconButton(
+                icon: Icon(
+                  Icons.close,
+                  size: 30.0,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),
@@ -55,6 +61,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TextFormField(
+                        autofocus: true,
                         decoration: InputDecoration(
                             icon: Icon(Icons.person),
                             labelText: "First Name",
@@ -64,6 +71,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             return 'First name field cannot be blank';
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          firstName = value;
                         },
                       ),
                     ),
@@ -79,6 +89,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                             return 'Last name field cannot be blank';
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          lastName = value;
                         },
                       ),
                     ),
@@ -96,6 +109,9 @@ class _AddContactScreenState extends State<AddContactScreen> {
                           }
                           return null;
                         },
+                        onChanged: (value) {
+                          phoneNumber = value;
+                        },
                       ),
                     ),
                     Padding(
@@ -105,7 +121,13 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
-                            print("All form fields are okay");
+                            // print("All form fields are okay");
+                            // print(firstName);
+                            // print(lastName);
+                            // print(phoneNumber);
+                            Provider.of<ContactData>(context, listen: false)
+                                .addContact(firstName, lastName, phoneNumber);
+                            Navigator.pop(context);
                           }
                         },
                         child: Text("SUBMIT"),
