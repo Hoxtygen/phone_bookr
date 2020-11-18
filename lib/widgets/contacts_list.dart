@@ -3,7 +3,12 @@ import 'package:phone_bookr/models/contact_data.dart';
 import 'package:phone_bookr/widgets/contact_tile.dart';
 import 'package:provider/provider.dart';
 
-class ContactsList extends StatelessWidget {
+class ContactsList extends StatefulWidget {
+  @override
+  _ContactsListState createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ContactData>(
@@ -15,6 +20,7 @@ class ContactsList extends StatelessWidget {
               firstName: contact.firstName,
               lastName: contact.lastName,
               phoneNumber: contact.phoneNumber,
+              contactIndex:  index,
             );
           },
           itemCount: contactData.contactCount,

@@ -66,4 +66,10 @@ class ContactData extends ChangeNotifier {
     _contacts.add(newContact);
     notifyListeners();
   }
+
+  void removeContact(Contact contact) {
+    _contacts.remove(contact);
+    print(contact.firstName);
+    notifyListeners();
+  }
 }

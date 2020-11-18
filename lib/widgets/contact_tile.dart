@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:phone_bookr/widgets/popupMenu_button.dart';
 
 class ContactTile extends StatelessWidget {
   final String firstName;
   final String lastName;
   final String phoneNumber;
+  final int contactIndex;
 
-  ContactTile({this.firstName, this.lastName, this.phoneNumber});
+  ContactTile(
+      {this.firstName, this.lastName, this.phoneNumber, this.contactIndex});
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
         radius: 30.0,
-          backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         child: CircleAvatar(
           child: Icon(Icons.image),
           radius: 27.0,
@@ -33,7 +36,10 @@ class ContactTile extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.more_vert),
+      // trailing: Icon(Icons.more_vert),
+      trailing: PopUpMenuButtonWidget(
+        contactIndex: contactIndex,
+      ),
       // tileColor: Colors.amberAccent,
     );
   }
