@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:phone_bookr/widgets/popupMenu_button.dart';
 
 class ContactTile extends StatelessWidget {
+  ContactTile({
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.contactIndex,
+    this.deleteCallback,
+  });
+
   final String firstName;
   final String lastName;
   final String phoneNumber;
   final int contactIndex;
+  final Function deleteCallback;
 
-  ContactTile(
-      {this.firstName, this.lastName, this.phoneNumber, this.contactIndex});
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -38,7 +45,8 @@ class ContactTile extends StatelessWidget {
       ),
       // trailing: Icon(Icons.more_vert),
       trailing: PopUpMenuButtonWidget(
-        contactIndex: contactIndex,
+        // contactIndex: contactIndex,
+        deleteContact: deleteCallback,
       ),
       // tileColor: Colors.amberAccent,
     );

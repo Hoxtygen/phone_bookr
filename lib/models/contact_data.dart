@@ -69,7 +69,7 @@ class ContactData extends ChangeNotifier {
 
   void removeContact(Contact contact) {
     _contacts.remove(contact);
-    print(contact.firstName);
+    print("You got all the way here, fatso");
     notifyListeners();
   }
 }

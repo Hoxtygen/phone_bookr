@@ -4,24 +4,19 @@ import 'package:phone_bookr/models/contact_model.dart';
 import 'package:phone_bookr/models/menu_items.dart';
 import 'package:provider/provider.dart';
 
-class PopUpMenuButtonWidget extends StatefulWidget {
+class PopUpMenuButtonWidget extends StatelessWidget {
+  PopUpMenuButtonWidget({this.contactIndex, this.deleteContact});
   final int contactIndex;
-  PopUpMenuButtonWidget({this.contactIndex});
-
-  @override
-  _PopUpMenuButtonWidgetState createState() => _PopUpMenuButtonWidgetState();
-}
-
-class _PopUpMenuButtonWidgetState extends State<PopUpMenuButtonWidget> {
+  final Function deleteContact;
   final List<MenuItem> menuitems = MenuItem.menuitems;
-  Contact contact;
+  //  Contact contact;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<ContactData>(
       builder: (context, contactData, child) {
         final contacts = contactData.contacts;
-        contact = contacts[widget.contactIndex];
+        // contact = contacts[widget.contactIndex];
         return PopupMenuButton(
           itemBuilder: (context) {
             return menuitems
@@ -33,14 +28,15 @@ class _PopUpMenuButtonWidgetState extends State<PopUpMenuButtonWidget> {
                 )
                 .toList();
           },
+          elevation: 4.5,
           onSelected: (value) {
             print(value);
-            // print(contacts[widget.contactIndex].firstName);
-            if (value == "delete") {
-              setState(() {
-                ContactData().removeContact(contact);
-                // print(ContactData().contactCount);
-              });
+            switch (value) {
+              case "delete":
+                return deleteContact();
+                break;
+              default:
+                throw new Error();
             }
           },
         );

@@ -20,13 +20,16 @@ class _ContactsListState extends State<ContactsList> {
               firstName: contact.firstName,
               lastName: contact.lastName,
               phoneNumber: contact.phoneNumber,
-              contactIndex:  index,
+              contactIndex: index,
+              deleteCallback: () {
+                print("delete Contact: ${contact.firstName}");
+                  ContactData().removeContact(contact);
+              },
             );
           },
           itemCount: contactData.contactCount,
         );
       },
-      
     );
   }
 }
