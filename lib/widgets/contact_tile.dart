@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:phone_bookr/screens/single_contact.dart';
+// import 'package:phone_bookr/test_single.dart';
 
 class ContactTile extends StatelessWidget {
+  ContactTile({
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.contactIndex,
+    this.deleteCallback,
+    this.onTap,
+  });
+
   final String firstName;
   final String lastName;
   final String phoneNumber;
+  final int contactIndex;
+  final Function deleteCallback;
+  final Function onTap;
 
-  ContactTile({this.firstName, this.lastName, this.phoneNumber});
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
         radius: 30.0,
-          backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         child: CircleAvatar(
           child: Icon(Icons.image),
           radius: 27.0,
@@ -33,8 +46,13 @@ class ContactTile extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      trailing: Icon(Icons.more_vert),
-      // tileColor: Colors.amberAccent,
+      onLongPress: deleteCallback,
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SingleContact(contactIndex: contactIndex);
+
+        }));
+      },
     );
   }
 }

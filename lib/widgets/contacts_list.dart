@@ -8,19 +8,23 @@ class ContactsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ContactData>(
       builder: (context, contactData, child) {
-        return ListView.builder(
+        return ListView.separated(
+          separatorBuilder: (context, index) => Divider(
+            color: Colors.black,
+            thickness: 2.0,
+          ),
           itemBuilder: (context, index) {
             final contact = contactData.contacts[index];
             return ContactTile(
               firstName: contact.firstName,
               lastName: contact.lastName,
               phoneNumber: contact.phoneNumber,
+              contactIndex: index,
             );
           },
           itemCount: contactData.contactCount,
         );
       },
-      
     );
   }
 }
