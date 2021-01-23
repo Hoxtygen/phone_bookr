@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:phone_bookr/models/contact_data.dart';
-import 'package:phone_bookr/widgets/my_button.dart';
 import 'package:provider/provider.dart';
+import 'package:phone_bookr/models/contact_data.dart';
+import 'package:phone_bookr/screens/contacts_screen.dart';
+import 'package:phone_bookr/widgets/my_button.dart';
 
-class SingleContact extends StatefulWidget {
+class SingleContact extends StatelessWidget {
   SingleContact({@required this.contactIndex});
   final contactIndex;
 
-  @override
-  _SingleContactState createState() => _SingleContactState();
-}
-
-class _SingleContactState extends State<SingleContact> {
-  @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
-    return Consumer<ContactData>(builder: (context, contactData, child) {
-      final contact = contactData.contacts[widget.contactIndex];
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("Single Contact Page"),
-          centerTitle: true,
-        ),
-        body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Single Contact Page"),
+        centerTitle: true,
+      ),
+      body: Container(
+          child: Consumer<ContactData>(builder: (context, contactData, child) {
+        final contact = contactData.contacts[contactIndex];
+        return Column(
           children: [
             Container(
               color: Colors.red,
@@ -44,12 +40,14 @@ class _SingleContactState extends State<SingleContact> {
                       ),
                     ),
                   ),
-                  Text(
-                    '${contact.firstName} ${contact.lastName}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      '${contact.firstName} ${contact.lastName}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -126,35 +124,73 @@ class _SingleContactState extends State<SingleContact> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  
                   MyButton(
                     onTap: () {
-                      print("You pressed me");
+                      print("You pressed me, $contactIndex");
                     },
                     icon: Icons.star_border_outlined,
                     iconText: "Favorite",
                   ),
                   MyButton(
                     onTap: () {
-                      print("You pressed me");
+                      print("You pressed me:  $contactIndex");
                     },
                     icon: Icons.mode_edit,
-                     iconText: "Edit",
+                    iconText: "Edit",
                   ),
                   MyButton(
                     onTap: () {
-                      print("You pressed me");
+                      showModalBottomSheet<Null>(
+                          context: context,
+                          backgroundColor: Colors.blueAccent,
+                          builder: (BuildContext context) {
+                            return ListView(
+                              children: <Widget>[
+                                //Add menu item to edit
+                                ListTile(
+                                  leading: Icon(Icons.share),
+                                  title: Text('Share contact'),
+                                ),
+                                ListTile(
+                                  //Add menu item to add a new item
+                                  leading: const Icon(Icons.copy),
+                                  title: const Text('Copy'),
+                                ),
+                                ListTile(
+                                  //Add menu item to add a new item
+                                  leading: Icon(Icons.delete),
+                                  title: Text('Delete'),
+                                  onTap: () {
+                                    contactData.removeContact(contact);
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return ContactsScreen();
+                                    }));
+                                  },
+                                ),
+                                ListTile(
+                                  //Add menu item to add a new item
+                                  leading: Icon(Icons.swap_horizontal_circle),
+                                  title: Text('Create shortcut'),
+                                ),
+                                ListTile(
+                                  //Add menu item to add a new item
+                                  leading: Icon(Icons.app_blocking),
+                                  title: Text('Add to blacklist'),
+                                ),
+                              ],
+                            );
+                          });
                     },
                     icon: Icons.more_vert,
-                     iconText: "More",
+                    iconText: "More",
                   ),
                 ],
               ),
             ),
           ],
-        ),
-        backgroundColor: Colors.greenAccent,
-      );
-    });
+        );
+      })),
+    );
   }
 }

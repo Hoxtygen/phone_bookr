@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:phone_bookr/widgets/popupMenu_button.dart';
+import 'package:phone_bookr/screens/single_contact.dart';
+// import 'package:phone_bookr/test_single.dart';
 
 class ContactTile extends StatelessWidget {
   ContactTile({
@@ -8,6 +9,7 @@ class ContactTile extends StatelessWidget {
     this.phoneNumber,
     this.contactIndex,
     this.deleteCallback,
+    this.onTap,
   });
 
   final String firstName;
@@ -15,6 +17,7 @@ class ContactTile extends StatelessWidget {
   final String phoneNumber;
   final int contactIndex;
   final Function deleteCallback;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +46,13 @@ class ContactTile extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      // trailing: Icon(Icons.more_vert),
-      trailing: PopUpMenuButtonWidget(
-        // contactIndex: contactIndex,
-        deleteContact: deleteCallback,
-      ),
-      // tileColor: Colors.amberAccent,
+      onLongPress: deleteCallback,
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SingleContact(contactIndex: contactIndex);
+
+        }));
+      },
     );
   }
 }

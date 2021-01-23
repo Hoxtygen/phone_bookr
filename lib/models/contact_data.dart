@@ -39,7 +39,10 @@ class ContactData extends ChangeNotifier {
       phoneNumber: "08097639837",
     ),
     Contact(
-        firstName: "Daucas", lastName: "Carota", phoneNumber: "080780987654"),
+      firstName: "Daucas",
+      lastName: "Carota",
+      phoneNumber: "080780987654",
+    ),
     Contact(
       firstName: "Cocos",
       lastName: "Nucifera",
@@ -69,7 +72,6 @@ class ContactData extends ChangeNotifier {
 
   void removeContact(Contact contact) {
     _contacts.remove(contact);
-    print("You got all the way here, fatso");
     notifyListeners();
   }
 }

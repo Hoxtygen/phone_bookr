@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:phone_bookr/models/contact_data.dart';
-import 'package:phone_bookr/models/contact_model.dart';
 import 'package:phone_bookr/models/menu_items.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +14,10 @@ class PopUpMenuButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ContactData>(
       builder: (context, contactData, child) {
-        final contacts = contactData.contacts;
+        // final contacts = contactData.contacts;
         // contact = contacts[widget.contactIndex];
         return PopupMenuButton(
-          itemBuilder: (context) {
+          itemBuilder: (BuildContext context) {
             return menuitems
                 .map(
                   (MenuItem menuitem) => PopupMenuItem(
@@ -32,9 +31,26 @@ class PopUpMenuButtonWidget extends StatelessWidget {
           onSelected: (value) {
             print(value);
             switch (value) {
+              case "favourite":
+                print("You chose to $value");
+                return "You chose to $value";
+
+              case "share":
+                print("You chose to $value");
+                return "You chose to $value";
+
               case "delete":
+                print("You chose to $value");
                 return deleteContact();
-                break;
+
+              case "edit":
+                print("You chose to $value");
+                return "You chose to $value";
+                
+              case "copy":
+                print("You chose to $value");
+
+                return "You chose to $value";
               default:
                 throw new Error();
             }
