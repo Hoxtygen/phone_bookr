@@ -121,10 +121,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
-                            // print("All form fields are okay");
-                            // print(firstName);
-                            // print(lastName);
-                            // print(phoneNumber);
+                            
                             Provider.of<ContactData>(context, listen: false)
                                 .addContact(firstName, lastName, phoneNumber);
                             Navigator.pop(context);

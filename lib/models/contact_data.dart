@@ -8,50 +8,61 @@ class ContactData extends ChangeNotifier {
       firstName: "Magnifera",
       lastName: "Indica",
       phoneNumber: "08097639837",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Carica",
       lastName: "Papaya",
       phoneNumber: "08097639837",
+      isFavorite: false,
     ),
     Contact(
-        firstName: "Elaeis",
-        lastName: "Guinensis",
-        phoneNumber: "080780987654"),
+      firstName: "Elaeis",
+      lastName: "Guinensis",
+      phoneNumber: "08078098765",
+      isFavorite: false,
+    ),
     Contact(
       firstName: "Zea",
       lastName: "Mays",
       phoneNumber: "07087787766",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Theobroma",
       lastName: "Cacao",
       phoneNumber: "09089876556",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Cucumis",
       lastName: "Melo",
       phoneNumber: "08097639837",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Capsicum",
       lastName: "FruitScence",
       phoneNumber: "08097639837",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Daucas",
       lastName: "Carota",
-      phoneNumber: "080780987654",
+      phoneNumber: "08078098765",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Cocos",
       lastName: "Nucifera",
       phoneNumber: "07087787766",
+      isFavorite: false,
     ),
     Contact(
       firstName: "Phoenix",
       lastName: "Dactylifera",
       phoneNumber: "09089876556",
+      isFavorite: false,
     ),
   ];
 
@@ -65,13 +76,21 @@ class ContactData extends ChangeNotifier {
 
   void addContact(String firstName, String lastName, String phoneNumber) {
     final newContact = Contact(
-        firstName: firstName, lastName: lastName, phoneNumber: phoneNumber);
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+    );
     _contacts.add(newContact);
     notifyListeners();
   }
 
   void removeContact(Contact contact) {
     _contacts.remove(contact);
+    notifyListeners();
+  }
+
+   makeFavorite(Contact contact) {
+    contact.isFavorite = !contact.isFavorite;
     notifyListeners();
   }
 }

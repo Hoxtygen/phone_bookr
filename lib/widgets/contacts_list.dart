@@ -15,6 +15,7 @@ class ContactsList extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final contact = contactData.contacts[index];
+            // print('contact favourite ${contact.isFavorite}');
             return ContactTile(
               firstName: contact.firstName,
               lastName: contact.lastName,

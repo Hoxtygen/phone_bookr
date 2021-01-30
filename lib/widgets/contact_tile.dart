@@ -50,7 +50,6 @@ class ContactTile extends StatelessWidget {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return SingleContact(contactIndex: contactIndex);
-
         }));
       },
     );
