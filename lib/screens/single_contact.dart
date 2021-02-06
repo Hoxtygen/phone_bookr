@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:phone_bookr/models/contact_data.dart';
 import 'package:phone_bookr/screens/contacts_screen.dart';
 import 'package:phone_bookr/widgets/my_button.dart';
+import 'package:flutter/services.dart';
 
 class SingleContact extends StatelessWidget {
   SingleContact({@required this.contactIndex});
+
   final contactIndex;
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -158,6 +160,14 @@ class SingleContact extends StatelessWidget {
                                     //Add menu item to add a new item
                                     leading: const Icon(Icons.copy),
                                     title: const Text('Copy'),
+                                    onTap: () {
+                                      Clipboard.setData(
+                                        ClipboardData(
+                                          text: contact.phoneNumber,
+                                        ),
+                                      );
+                                      Navigator.pop(context);
+                                    },
                                   ),
                                   ListTile(
                                     //Add menu item to add a new item
