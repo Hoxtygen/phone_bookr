@@ -21,57 +21,13 @@ class ContactsScreen extends StatelessWidget {
             ),
           );
         },
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: Colors.blueAccent,
         child: Icon(Icons.add),
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30.0),
-                bottomRight: Radius.circular(30.0),
-              ),
-            ),
-            padding: EdgeInsets.only(
-              top: 60.0,
-              right: 20.0,
-              bottom: 30.0,
-              left: 20.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "Contact List",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      size: 30.0,
-                    ),
-                    CircleAvatar(
-                      child: Icon(
-                        Icons.apps,
-                        size: 30.0,
-                      ),
-                      radius: 20.0,
-                      backgroundColor: Color(0xff8F58FF),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
+          Container(),
           Expanded(
             child: Container(
               child: Container(
