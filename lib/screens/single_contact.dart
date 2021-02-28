@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 
 class SingleContact extends StatelessWidget {
   SingleContact({@required this.contactIndex});
-
   final contactIndex;
+
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(

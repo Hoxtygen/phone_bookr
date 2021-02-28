@@ -66,12 +66,29 @@ class ContactData extends ChangeNotifier {
     ),
   ];
 
+  // List<Contact> _favoriteContacts = _contacts.where((Contact contact) =>contact.isFavorite == true);
+  List<Contact> _favoriteContacts = [];
+
   UnmodifiableListView<Contact> get contacts {
     return UnmodifiableListView(_contacts);
   }
 
+  updateFav() {
+    _favoriteContacts =
+        _contacts.where((Contact contact) => contact.isFavorite == true);
+    return _favoriteContacts;
+  }
+
+  UnmodifiableListView<Contact> get favoriteContacts {
+    return UnmodifiableListView(_favoriteContacts);
+  }
+
   int get contactCount {
     return _contacts.length;
+  }
+
+  int get favcontactCount {
+    return _favoriteContacts.length;
   }
 
   void addContact(String firstName, String lastName, String phoneNumber) {
@@ -89,8 +106,9 @@ class ContactData extends ChangeNotifier {
     notifyListeners();
   }
 
-   makeFavorite(Contact contact) {
+  makeFavorite(Contact contact) {
     contact.isFavorite = !contact.isFavorite;
+    _favoriteContacts.add(contact);
     notifyListeners();
   }
 }

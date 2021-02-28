@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:phone_bookr/models/contact_data.dart';
 import 'package:phone_bookr/widgets/contact_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:phone_bookr/screens/single_contact.dart';
+
 
 class ContactsList extends StatelessWidget {
   @override
@@ -15,12 +17,16 @@ class ContactsList extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             final contact = contactData.contacts[index];
-            // print('contact favourite ${contact.isFavorite}');
             return ContactTile(
               firstName: contact.firstName,
               lastName: contact.lastName,
               phoneNumber: contact.phoneNumber,
               contactIndex: index,
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SingleContact(contactIndex: index,);
+                }));
+              },
             );
           },
           itemCount: contactData.contactCount,

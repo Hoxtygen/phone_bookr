@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phone_bookr/screens/single_contact.dart';
 // import 'package:phone_bookr/test_single.dart';
 
 class ContactTile extends StatelessWidget {
@@ -47,11 +46,7 @@ class ContactTile extends StatelessWidget {
         ),
       ),
       onLongPress: deleteCallback,
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SingleContact(contactIndex: contactIndex);
-        }));
-      },
+      onTap:onTap,
     );
   }
 }
