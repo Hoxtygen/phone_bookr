@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phone_bookr/screens/add_contact_screen.dart';
-import 'package:phone_bookr/widgets/contacts_list.dart';
+import 'package:phone_bookr/screens/phone_contacts_page.dart';
+
 
 class ContactsScreen extends StatelessWidget {
   @override
@@ -31,7 +32,9 @@ class ContactsScreen extends StatelessWidget {
           Expanded(
             child: Container(
               child: Container(
-                child: ContactsList(),
+                // child: ContactsList(),
+                //  child: HandlePermission(),
+                child: PhoneContactsPage(),
               ),
             ),
           )
