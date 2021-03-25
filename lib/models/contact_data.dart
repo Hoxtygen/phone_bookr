@@ -1,64 +1,65 @@
 import 'package:flutter/foundation.dart';
 import 'package:phone_bookr/models/contact_model.dart';
 import 'dart:collection';
+import 'package:contacts_service/contacts_service.dart';
 
 class ContactData extends ChangeNotifier {
-  List<Contact> _contacts = [
-    Contact(
+  List<WContact> _contacts = [
+    WContact(
       firstName: "Magnifera",
       lastName: "Indica",
       phoneNumber: "08097639837",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Carica",
       lastName: "Papaya",
       phoneNumber: "08097639837",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Elaeis",
       lastName: "Guinensis",
       phoneNumber: "08078098765",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Zea",
       lastName: "Mays",
       phoneNumber: "07087787766",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Theobroma",
       lastName: "Cacao",
       phoneNumber: "09089876556",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Cucumis",
       lastName: "Melo",
       phoneNumber: "08097639837",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Capsicum",
       lastName: "FruitScence",
       phoneNumber: "08097639837",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Daucas",
       lastName: "Carota",
       phoneNumber: "08078098765",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Cocos",
       lastName: "Nucifera",
       phoneNumber: "07087787766",
       isFavorite: false,
     ),
-    Contact(
+    WContact(
       firstName: "Phoenix",
       lastName: "Dactylifera",
       phoneNumber: "09089876556",
@@ -66,20 +67,31 @@ class ContactData extends ChangeNotifier {
     ),
   ];
 
-  // List<Contact> _favoriteContacts = _contacts.where((Contact contact) =>contact.isFavorite == true);
-  List<Contact> _favoriteContacts = [];
+  List<Contact> myContacts;
 
-  UnmodifiableListView<Contact> get contacts {
+  // List<Contact> _favoriteContacts = _contacts.where((Contact contact) =>contact.isFavorite == true);
+  List<WContact> _favoriteContacts = [];
+
+  UnmodifiableListView<WContact> get contacts {
+    // getWasiu();
     return UnmodifiableListView(_contacts);
   }
 
+ /*  Future getWasiu() async {
+    List<WContact> wasiu = await PhoneData().getContacts();
+
+    // _contacts.addAll(wasiu);
+    print("_contacts: $_contacts");
+    return wasiu.toList();
+  }
+ */
   updateFav() {
     _favoriteContacts =
-        _contacts.where((Contact contact) => contact.isFavorite == true);
+        _contacts.where((WContact contact) => contact.isFavorite == true);
     return _favoriteContacts;
   }
 
-  UnmodifiableListView<Contact> get favoriteContacts {
+  UnmodifiableListView<WContact> get favoriteContacts {
     return UnmodifiableListView(_favoriteContacts);
   }
 
@@ -92,7 +104,7 @@ class ContactData extends ChangeNotifier {
   }
 
   void addContact(String firstName, String lastName, String phoneNumber) {
-    final newContact = Contact(
+    final newContact = WContact(
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
@@ -101,14 +113,26 @@ class ContactData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeContact(Contact contact) {
+  void removeContact(WContact contact) {
     _contacts.remove(contact);
     notifyListeners();
   }
 
-  makeFavorite(Contact contact) {
+  makeFavorite(WContact contact) {
     contact.isFavorite = !contact.isFavorite;
     _favoriteContacts.add(contact);
     notifyListeners();
+  }
+
+// Write this function in another file
+//consume it in this file
+// merge the result with the contact in this file
+//implement caching to stop repeated calls
+  Future getContacts() async {
+    // retrieving contacts after permission has been given
+    final Iterable<Contact> contacts = await ContactsService.getContacts();
+    // myContacts = contacts; 
+    print("myContacts: $myContacts");
+    return myContacts;
   }
 }

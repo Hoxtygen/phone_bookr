@@ -1,5 +1,6 @@
-class Contact {
-  Contact({
+class WContact {
+  //change this name because it's having conflict with the contact_service package
+  WContact({
     this.firstName,
     this.lastName,
     this.phoneNumber,
