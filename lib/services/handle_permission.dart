@@ -31,8 +31,10 @@ class _HandlePermissionState extends State<HandlePermission> {
   Future checkPermission() async {
     final PermissionStatus permissionStatus = await _getPermission();
     if (permissionStatus == PermissionStatus.granted) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => AllContact()));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AllContact()),
+      );
     } else {
       showDialog(
           context: context,
@@ -54,17 +56,18 @@ class _HandlePermissionState extends State<HandlePermission> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.tealAccent,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Text("Phone BookR"),
+      body: Container(
+        color: Colors.blueAccent,
+        child: Center(
+          child: Text(
+            "Phone BookR",
+            style: TextStyle(
+              fontSize: 32.0,
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
