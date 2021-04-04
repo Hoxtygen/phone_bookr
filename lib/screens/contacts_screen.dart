@@ -35,12 +35,9 @@ class ContactsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(),
           Expanded(
             child: Container(
-              child: Container(
-                child: PhoneContactsPage(),
-              ),
+              child: PhoneContactsPage(),
             ),
           )
         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:phone_bookr/models/contact_model.dart';
+import 'package:phone_bookr/widgets/contacts_list.dart';
 
 class PhoneContactsPage extends StatefulWidget {
   @override
@@ -7,8 +9,7 @@ class PhoneContactsPage extends StatefulWidget {
 }
 
 class _PhoneContactsPageState extends State<PhoneContactsPage> {
-  Iterable<Contact> _contacts;
-
+  List<WContact> contacts;
   @override
   void initState() {
     getContacts();
@@ -16,42 +17,31 @@ class _PhoneContactsPageState extends State<PhoneContactsPage> {
   }
 
   Future<void> getContacts() async {
-    // retrieving contacts after permission has been given
-    final Iterable<Contact> contacts = await ContactsService.getContacts();
+    List colors = [Colors.green, Colors.indigo, Colors.yellow, Colors.orange];
+    int colorIndex = 0;
+    // retrieve contacts after permission has been given
+    List<WContact> _contacts =
+        (await ContactsService.getContacts()).map((contact) {
+      Color baseColor = colors[colorIndex];
+      colorIndex++;
+      if (colorIndex == colors.length) {
+        colorIndex = 0;
+      }
+      return new WContact(color: baseColor, contactInfo: contact);
+    }).toList();
     setState(() {
-      _contacts = contacts;
+      contacts = _contacts;
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        // SeeContactsButton(),
-        body: _contacts != null
-            ? ListView.builder(
-                itemCount: _contacts?.length ?? 0,
-                itemBuilder: (BuildContext context, int index) {
-                  Contact contact = _contacts?.elementAt(index);
-                  return ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 2.0, horizontal: 18.0),
-                    leading:
-                        (contact.avatar != null && contact.avatar.isNotEmpty)
-                            ? CircleAvatar(
-                                backgroundImage: MemoryImage(contact.avatar))
-                            : CircleAvatar(
-                                child: Text(contact.initials()),
-                                backgroundColor: Theme.of(context).accentColor,
-                              ),
-                    title: Text(contact.displayName ?? ''),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[],
-                    ),
-                  );
-                },
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ));
+      backgroundColor: Colors.white,
+      body: contacts != null
+          ? ContactsList(contacts)
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
+    );
   }
 }
