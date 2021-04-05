@@ -34,11 +34,18 @@ class _PhoneContactsPageState extends State<PhoneContactsPage> {
     });
   }
 
+  handleContactReload() {
+    getContacts();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: contacts != null
-          ? ContactsList(contacts)
+          ? ContactsList(
+              allContacts: contacts,
+              reloadContacts: handleContactReload,
+            )
           : Center(
               child: CircularProgressIndicator(),
             ),

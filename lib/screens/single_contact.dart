@@ -7,10 +7,9 @@ import 'package:phone_bookr/widgets/my_button.dart';
 import 'package:flutter/services.dart';
 
 class SingleContact extends StatefulWidget {
-  SingleContact({@required this.contact});
+  SingleContact({@required this.contact, @required this.handleUpdate});
   final WContact contact;
-  // final Function(WContact) handleDelete;
-  // final Function(WContact) handleUpdate;
+  final Function(WContact) handleUpdate;
 
   @override
   _SingleContactState createState() => _SingleContactState();
@@ -135,7 +134,26 @@ class _SingleContactState extends State<SingleContact> {
                 ),
                 MyButton(
                   onTap: () async {
-                    print('You clicked edit button');
+                    try {
+                      Contact updatedContact =
+                          await ContactsService.openExistingContact(
+                              widget.contact.contactInfo);
+                      setState(() {
+                        widget.contact.contactInfo = updatedContact;
+                      });
+                      widget.handleUpdate(widget.contact);
+                    } on FormOperationException catch (e) {
+                      switch (e.errorCode) {
+                        case FormOperationErrorCode.FORM_OPERATION_CANCELED:
+                        case FormOperationErrorCode.FORM_COULD_NOT_BE_OPEN:
+                        case FormOperationErrorCode
+                            .FORM_OPERATION_UNKNOWN_ERROR:
+                          print(e.toString());
+
+                        /*  break;
+              default: */
+                      }
+                    }
                   },
                   icon: Icons.mode_edit,
                   iconText: "Edit",
