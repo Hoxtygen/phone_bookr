@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:phone_bookr/screens/all_contact.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:phone_bookr/screens/contacts_screen.dart';
 
 class HandlePermission extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _HandlePermissionState extends State<HandlePermission> {
     if (permissionStatus == PermissionStatus.granted) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AllContact()),
+        MaterialPageRoute(builder: (context) => ContactsScreen()),
       );
     } else {
       showDialog(

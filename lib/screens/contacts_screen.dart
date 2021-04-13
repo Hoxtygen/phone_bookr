@@ -1,12 +1,16 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-import 'package:phone_bookr/screens/all_contact.dart';
 import 'package:phone_bookr/screens/phone_contacts_page.dart';
 
 class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Contacts"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
@@ -14,7 +18,7 @@ class ContactsScreen extends StatelessWidget {
             if (contact != null) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AllContact()),
+                MaterialPageRoute(builder: (context) => ContactsScreen()),
               );
             }
           } on FormOperationException catch (e) {
@@ -22,10 +26,9 @@ class ContactsScreen extends StatelessWidget {
               case FormOperationErrorCode.FORM_OPERATION_CANCELED:
               case FormOperationErrorCode.FORM_COULD_NOT_BE_OPEN:
               case FormOperationErrorCode.FORM_OPERATION_UNKNOWN_ERROR:
-                print(e.toString());
-
-              /*  break;
-              default: */
+                break;
+              default:
+                throw  ErrorDescription("Uhandled Exception");
             }
           }
         },
@@ -33,14 +36,9 @@ class ContactsScreen extends StatelessWidget {
         child: Icon(Icons.add),
         foregroundColor: Colors.white,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              child: PhoneContactsPage(),
-            ),
-          )
-        ],
+      body: Container(
+        color: Colors.lightBlueAccent,
+        child: PhoneContactsPage(),
       ),
       backgroundColor: Color(0xffFF4761),
     );

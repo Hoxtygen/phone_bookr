@@ -25,6 +25,9 @@ class ContactsList extends StatelessWidget {
                 handleUpdate: (WContact _contact) {
                   reloadContacts();
                 },
+                handleDelete: (WContact _contact) {
+                  reloadContacts();
+                },
               );
             }));
           },
