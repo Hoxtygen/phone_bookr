@@ -18,6 +18,7 @@ class MyButton extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon),
                 Text(iconText),
