@@ -1,6 +1,6 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:phone_bookr/models/contact_model.dart';
 import 'package:phone_bookr/widgets/ContactAvatar.dart';
 import 'package:phone_bookr/widgets/my_button.dart';
@@ -73,7 +73,25 @@ class _SingleContactState extends State<SingleContact> {
           deleteConfirmationDialog();
           break;
         case 'Copy':
-          print("Copying job in action");
+          Clipboard.setData(new ClipboardData(
+            text: widget.contact.contactInfo.phones.length > 0
+                ? widget.contact.contactInfo.phones.elementAt(0).value
+                : '',
+          )).then((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Phone number copied to clipboard",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    
+                  ),
+                ),
+                backgroundColor: Colors.white,
+              ),
+            );
+          });
           break;
         default:
           throw new Error();
@@ -196,7 +214,6 @@ class _SingleContactState extends State<SingleContact> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
